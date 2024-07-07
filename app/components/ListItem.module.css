@@ -1,0 +1,16 @@
+.profileImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.imageContainer {
+  width: 5vw;
+  height: 5vw;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.tableData {
+  vertical-align: middle;
+}

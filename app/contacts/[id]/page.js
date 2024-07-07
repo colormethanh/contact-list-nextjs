@@ -19,7 +19,7 @@ export default function Person() {
   
 
   return (
-    <>
+    <main>
       <h1> Contact page for { person && person.name } </h1>
       <img src={person.image_url} alt={`profile pic for ${id}`} height={100} width={100} />
       <p> {person.email} </p>
@@ -27,6 +27,6 @@ export default function Person() {
 
       <br></br>
       <RerouteBtn text={"Home"} route={"/contacts"} />
-    </>
+    </main>
   )
 }

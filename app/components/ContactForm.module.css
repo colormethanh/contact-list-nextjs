@@ -1,0 +1,20 @@
+.contactForm {
+  width: 50vw;
+  border: 1px solid rgba(0, 0, 0, 0.219);
+  border-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.219);
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row-reverse;
+}
