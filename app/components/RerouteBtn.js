@@ -11,7 +11,7 @@ export default function RerouteBtn({text, route}) {
 
   return (
     <button className='btn btn-primary' onClick={handleClick}> {text} </button>
-  )
+  );
 };
 
 RerouteBtn.propTypes = {

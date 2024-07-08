@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import styles from './ListItem.module.css';
+import styles from './TableRow.module.css';
 
-export default function ListItem({person}) {
+export default function TableRow({person}) {
   const router = useRouter();
 
   const handleClick = () => {
@@ -24,10 +24,10 @@ export default function ListItem({person}) {
       <td className={styles.tableData}> {person.name} </td>
       <td className={styles.tableData}> {person.email} </td>
       <td className={styles.tableData}> {person.phone_number} </td>
-    </tr>
+  </tr>
   )
 };
 
-ListItem.propTypes = {
+TableRow.propTypes = {
   person: PropTypes.object
 };
