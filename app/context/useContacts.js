@@ -36,7 +36,13 @@ export const ContactsProvider = ({children}) => {
     return contact;
   };
 
-  const contactsContextValue = {contacts, addContact, getContact};
+  const deleteContact = (id) => {
+    const newContacts = []; 
+    contacts.forEach((contact) => contact.id !== id && newContacts.push(contact));
+    return setContacts(newContacts);
+  };
+
+  const contactsContextValue = {contacts, addContact, getContact, deleteContact};
 
   return (
     <ContactsContext.Provider value={contactsContextValue} >

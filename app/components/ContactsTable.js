@@ -29,6 +29,6 @@ export default function ContactsTable({contacts}) {
 };
 
 
-ContactsTable.PropTypes = {
+ContactsTable.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.object)
 }

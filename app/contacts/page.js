@@ -1,5 +1,5 @@
 "use client";
-import ContactsTable from "../components/contactsTable";
+import ContactsTable from "../components/ContactsTable";
 import { useContacts } from "../context/useContacts";
 
 export default function Contact() {
