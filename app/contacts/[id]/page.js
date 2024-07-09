@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from 'next/navigation';
 import { useContacts } from "@/app/context/useContacts";
 import { useParams } from "next/navigation";
@@ -8,13 +8,16 @@ import ContactForm from "@/app/components/ContactForm";
 import RerouteBtn from "@/app/components/RerouteBtn";
 import ContactCard from "@/app/components/ContactCard";
 import ActionBtn from "@/app/components/ActionBtn";
+import Modal from "@/app/components/Modal";
 
 export default function Person() {
-  const { getContact, deleteContact, editContact } = useContacts();
+  const { getContact, deleteContact, editContact, getPrevAndNext } = useContacts();
   const [isEdit, setIsEdit] = useState(false);
   const { id } = useParams();
-  const [person, setPerson] = useState(getContact(id))
+  const [person, setPerson] = useState(getContact(id));
+  const [{prevId, nextId}, _] = useState(getPrevAndNext(id));
   const {formData, handleInput, resetData} = useFormData(person);
+  const modalToggler = useRef(null);
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -30,7 +33,12 @@ export default function Person() {
   const handleDelete = () => {
     deleteContact(id);
     router.push("/contacts");
-  }
+  };
+
+  const handleToggleEdit = () => {
+    if (isEdit) resetData();
+    setIsEdit((prev) => !prev);
+  };
 
 
   if (!person) {
@@ -55,13 +63,26 @@ export default function Person() {
         <ContactCard person={person} isEdit={isEdit} />
       }
       <div className="d-flex mt-3"> 
-        <ActionBtn text={"<"} action={() => console.log("prev btn clicked")}/>
+        <RerouteBtn text={"<"} route={`/contacts/${prevId && prevId}`} isDisabled={!prevId}/>
         <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"} isDisabled={isEdit}/>
-        <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={() => {setIsEdit((prev) => !prev)}} className="me-3"/> 
-        <ActionBtn text="delete" action={handleDelete} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
-        <ActionBtn text={">"} action={() => console.log("next btn clicked")}/>
+        <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={handleToggleEdit} className="me-3"/> 
+        <ActionBtn text="delete" action={() => modalToggler.current.click()} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
+        <RerouteBtn text={">"} route={`/contacts/${nextId && nextId}`} isDisabled={!nextId} />
       </div>
-      
+      <Modal 
+        id={"myModal"} 
+        body={`You're about to delete the contact for ${person.name}. Are you sure?`}
+        title={"Are you sure???"}
+        confirmText={"Yes. Delete that sucker!"}
+        cancelText={"Oh nevermind"}
+        onConfirm={handleDelete}
+        />
+      <button 
+        type="button" 
+        data-bs-toggle="modal" 
+        data-bs-target="#myModal" 
+        ref={modalToggler} 
+        style={{display:"none"}}>Launch modal</button>
     </main>
   )
 }

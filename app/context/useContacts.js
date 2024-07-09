@@ -26,7 +26,7 @@ export const ContactsProvider = ({children}) => {
   const createID = () => Math.round(Math.random() * 100000000);
 
   const addContact = (data) => {
-    const newContact = {...data, id: createID()}
+    const newContact = {...data, id: createID()};
     return setContacts((prev) => [...prev, newContact]);
   };
 
@@ -37,7 +37,6 @@ export const ContactsProvider = ({children}) => {
 
   const deleteContact = (id) => {
     const newContacts = []; 
-    debugger
     contacts.forEach((contact) => contact.id !== parseInt(id) && newContacts.push(contact));
     return setContacts(newContacts);
   };
@@ -47,7 +46,17 @@ export const ContactsProvider = ({children}) => {
     setContacts((prev) => prev.map((contact) => contact.id === id ? {...formData, id} : contact ));
     return {...formData, id};
   };
-  const contactsContextValue = {contacts, addContact, getContact, deleteContact, editContact};
+
+  const getPrevAndNext = (id) => {
+    const i = contacts.findIndex((itm) => itm.id === parseInt(id));
+    if (i < 0) return {prevId : null, nextId: null};
+    const prevId = i === 0 ? null : contacts[i - 1].id;
+    const nextId = i === contacts.length - 1 ? null : contacts[i + 1].id;
+    return {prevId, nextId};
+  }
+
+
+  const contactsContextValue = {contacts, addContact, getContact, deleteContact, editContact, getPrevAndNext};
 
   return (
     <ContactsContext.Provider value={contactsContextValue} >

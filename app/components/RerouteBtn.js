@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 
-export default function RerouteBtn({text, route, className="", isDisabled="false"}) {
+export default function RerouteBtn({text, route, className="", isDisabled=false}) {
   const router = useRouter();
   
   const handleClick = () => {
