@@ -42,7 +42,12 @@ export const ContactsProvider = ({children}) => {
     return setContacts(newContacts);
   };
 
-  const contactsContextValue = {contacts, addContact, getContact, deleteContact};
+  const editContact = (formData, id) => {
+    id = parseInt(id);
+    setContacts((prev) => prev.map((contact) => contact.id === id ? {...formData, id} : contact ));
+    return {...formData, id};
+  };
+  const contactsContextValue = {contacts, addContact, getContact, deleteContact, editContact};
 
   return (
     <ContactsContext.Provider value={contactsContextValue} >

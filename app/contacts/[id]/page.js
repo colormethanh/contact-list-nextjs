@@ -10,27 +10,26 @@ import ContactCard from "@/app/components/ContactCard";
 import ActionBtn from "@/app/components/ActionBtn";
 
 export default function Person() {
+  const { getContact, deleteContact, editContact } = useContacts();
   const [isEdit, setIsEdit] = useState(false);
-  const { getContact } = useContacts();
   const { id } = useParams();
-  const person = getContact(id);
+  const [person, setPerson] = useState(getContact(id))
   const {formData, handleInput, resetData} = useFormData(person);
-  const {deleteContact} = useContacts();
   const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // // todo: Validate form
-    // addContact(formData);
-    // // todo: Success message
-    // resetData();
-    // router.push("/contacts");
-    console.log({formData});
+    // todo: Validate form
+    // todo: Success message
+    console.log({...formData, id});
+    const updatedPerson = editContact(formData, id);
+    setPerson(updatedPerson);
+    setIsEdit((prev) => !prev);
   };
 
   const handleDelete = () => {
     deleteContact(id);
-    router.push("/contacts")
+    router.push("/contacts");
   }
 
 
@@ -57,9 +56,9 @@ export default function Person() {
       }
       <div className="d-flex mt-3"> 
         <ActionBtn text={"<"} action={() => console.log("prev btn clicked")}/>
-        <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"}/>
-        <ActionBtn text="edit" action={() => {setIsEdit((prev) => !prev)}} className="me-3"/> 
-        <ActionBtn text="delete" action={handleDelete} className="me-3" btnStyle="btn-danger"/>
+        <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"} isDisabled={isEdit}/>
+        <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={() => {setIsEdit((prev) => !prev)}} className="me-3"/> 
+        <ActionBtn text="delete" action={handleDelete} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
         <ActionBtn text={">"} action={() => console.log("next btn clicked")}/>
       </div>
       

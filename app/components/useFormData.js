@@ -14,6 +14,7 @@ export default function useFormData(initialData = null) {
 
   const resetData = () => setFormData(initialData ? initialData : emptyData);
 
+
   return {
     formData, handleInput, resetData
   };

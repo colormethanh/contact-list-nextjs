@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 
-export default function RerouteBtn({text, route, className=""}) {
+export default function RerouteBtn({text, route, className="", isDisabled="false"}) {
   const router = useRouter();
   
   const handleClick = () => {
@@ -11,7 +11,7 @@ export default function RerouteBtn({text, route, className=""}) {
 
   return (
     <div className={`d-flex justify-content-center ${className}`}>
-      <button className='btn btn-primary' onClick={handleClick}>  {text} 
+      <button className='btn btn-primary' onClick={handleClick} disabled={isDisabled}>  {text} 
       </button>
     </div>
   );

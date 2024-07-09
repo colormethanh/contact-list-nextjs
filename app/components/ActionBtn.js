@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export default function ActionBtn({text, action, className="", btnStyle=""}) {
+export default function ActionBtn({text, action, className="", btnStyle="", isDisabled=false}) {
   
   const handleClick = () => {
     action();
@@ -8,7 +8,11 @@ export default function ActionBtn({text, action, className="", btnStyle=""}) {
 
   return (
     <div className={`d-flex justify-content-center ${className}`} >
-      <button className={`btn btn-primary ${btnStyle}`} onClick={handleClick}>  {text} 
+      <button 
+        className={`btn btn-primary ${btnStyle}`} 
+        onClick={handleClick} 
+        disabled={isDisabled}> 
+        {text} 
       </button>
     </div>
   );
