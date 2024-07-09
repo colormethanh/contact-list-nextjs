@@ -6,7 +6,6 @@ export default function ContactForm({formData, handleInput, handleSubmit}) {
 
   return (
     <>
-      <h1 className="text-center"> Create New Contact </h1>
       <div className={styles.formContainer}>
         <form className={styles.contactForm} onSubmit={handleSubmit}>
           <FormInput 

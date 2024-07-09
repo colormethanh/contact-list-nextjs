@@ -27,7 +27,6 @@ export const ContactsProvider = ({children}) => {
 
   const addContact = (data) => {
     const newContact = {...data, id: createID()}
-
     return setContacts((prev) => [...prev, newContact]);
   };
 
@@ -38,7 +37,8 @@ export const ContactsProvider = ({children}) => {
 
   const deleteContact = (id) => {
     const newContacts = []; 
-    contacts.forEach((contact) => contact.id !== id && newContacts.push(contact));
+    debugger
+    contacts.forEach((contact) => contact.id !== parseInt(id) && newContacts.push(contact));
     return setContacts(newContacts);
   };
 

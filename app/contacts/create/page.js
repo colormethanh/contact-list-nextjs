@@ -21,10 +21,11 @@ export default function CreateContact() {
 
   return (
     <main>
+      <h1 className="text-center"> Create New Contact </h1>
       <ContactForm 
         formData={formData} 
         handleInput={handleInput} 
-        handleSubmit={(e) => handleSubmit(e)}/>
+        handleSubmit={(e) => handleSubmit(e)} />
     </main>
   );
 };
