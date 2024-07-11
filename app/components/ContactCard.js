@@ -1,13 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
 import styles from "./ContactCard.module.css";
 import PropTypes from "prop-types";
 
 
-export default function ContactCard({person}) {
+export default function ContactCard({person, className=""}) {
   
   return (
-      <div className={styles.contactCard}>
-        <img src={person.image_url} alt={`${person.name}'s profile image`} className={styles.contactImage} />
+      <div className={`${className} ${styles.contactCard}`}>
+        <div className={`my-3 ${styles.imageContainer}`}>
+          <img src={person.image_url} alt={`${person.name}'s profile image`} className={`${styles.contactImage}`} />
+        </div>
         <h2 className='text-center'> {person.name} </h2>
         <p> {person.email} </p>
         <p> {person.phone_number} </p>
@@ -17,6 +18,7 @@ export default function ContactCard({person}) {
 
 ContactCard.propTypes = {
   person: PropTypes.object.isRequired,
+  className: PropTypes.string
 };
 
 

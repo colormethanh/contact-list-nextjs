@@ -18,11 +18,15 @@ export default function CreateContact() {
 
   return (
     <main>
+      <div className="row">
+
       <h1 className="text-center"> Create New Contact </h1>
       <ContactForm 
-        formData={formData} 
+        formData={formData}
+        className="col-8 col-md-6 mx-auto" 
         handleInput={handleInput} 
         handleSubmit={(e) => handleSubmit(e)} />
+      </div>
     </main>
   );
 };

@@ -1,13 +1,13 @@
 "use client";
-import { useRouter } from 'next/navigation';
+import { useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useContacts } from "../context/useContacts";
 import ContactsTable from "../components/ContactsTable";
-import Modal from '../components/Modal';
-import { useRef, useState } from 'react';
+import Modal from "../components/Modal";
 
 export default function Contacts() {
-  const [selectedUser, setSelectedUser] = useState()
-  const { contacts, deleteContact } = useContacts();
+  const { contacts, deleteContact, getContact } = useContacts();
+  const [selectedUser, setSelectedUser] = useState(contacts[0]);
   const router = useRouter();
   const tableModalToggler = useRef(null);
 
@@ -17,27 +17,26 @@ export default function Contacts() {
   };
 
   const toggleModal = (id) => {
-    setSelectedUser(id);
-    tableModalToggler.current.click()
+    setSelectedUser(getContact(id));
+    tableModalToggler.current.click();
   };
-
 
   return (
     <main>
       <h1 className="text-center">Your Contacts</h1>
       <ContactsTable contacts={contacts} handleDeleteClick={toggleModal} />
       <Modal 
-        id={"contactModal"} 
-        body={`You're about to delete the contact for. Are you sure?`}
+        id={"confirmationModal"} 
+        body={`You're about to delete the contact for ${selectedUser.name}. Are you sure?`}
         title={"Are you sure???"}
         confirmText={"Yes. Delete that sucker!"}
         cancelText={"Oh nevermind"}
-        onConfirm={() => {handleDelete(selectedUser)}}
+        onConfirm={() => handleDelete(selectedUser.id)}
         />
       <button 
         type="button" 
         data-bs-toggle="modal" 
-        data-bs-target="#contactModal" 
+        data-bs-target="#confirmationModal" 
         ref={tableModalToggler} 
         style={{display:"none"}}>Launch modal</button>
     </main>

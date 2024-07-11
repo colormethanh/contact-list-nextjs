@@ -51,23 +51,31 @@ export default function Person() {
   
 
   return (
-    <main className="d-flex flex-column align-items-center">
+    <main>
+      <div className="row">
+
       <h1 className="text-center"> Contact Card </h1>
+      <div className="col-12">
+        <div className="row justify-content-center">
+          <div className="col-8 col-md-6 col-lg-4 mb-3 d-flex justify-content-between">
+            <RerouteBtn text={"<"} route={`/contacts/${prevId && prevId}`} isDisabled={!prevId}/>
+            <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"} isDisabled={isEdit}/>
+            <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={handleToggleEdit} className="me-3"/> 
+            <ActionBtn text="delete" action={toggleModal} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
+            <RerouteBtn text={">"} route={`/contacts/${nextId && nextId}`} isDisabled={!nextId} />
+          </div>  
+        </div> 
+      </div>
       {isEdit ? 
         <ContactForm 
-          formData={formData} 
-          handleInput={handleInput} 
-          handleSubmit={(e) => (handleSubmit(e))}/> 
+        formData={formData} 
+        handleInput={handleInput} 
+        handleSubmit={(e) => (handleSubmit(e))}
+        className="col-6 col-md-4 mx-auto"
+        /> 
         :
-        <ContactCard person={person} isEdit={isEdit} />
+        <ContactCard person={person} className="col-6 col-md-4 mx-auto d-flex flex-column align-items-center" isEdit={isEdit} />
       }
-      <div className="d-flex mt-3"> 
-        <RerouteBtn text={"<"} route={`/contacts/${prevId && prevId}`} isDisabled={!prevId}/>
-        <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"} isDisabled={isEdit}/>
-        <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={handleToggleEdit} className="me-3"/> 
-        <ActionBtn text="delete" action={toggleModal} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
-        <RerouteBtn text={">"} route={`/contacts/${nextId && nextId}`} isDisabled={!nextId} />
-      </div>
       <Modal 
         id={"contactModal"} 
         body={`You're about to delete the contact for ${person.name}. Are you sure?`}
@@ -82,6 +90,7 @@ export default function Person() {
         data-bs-target="#contactModal" 
         ref={modalToggler} 
         style={{display:"none"}}>Launch modal</button>
+      </div>
     </main>
   );
 };

@@ -3,14 +3,13 @@ import styles from "./ContactForm.module.css";
 import PropTypes from "prop-types";
 
 
-export default function ContactForm({formData, handleInput, handleSubmit}) {
+export default function ContactForm({formData, handleInput, handleSubmit, className}) {
 
   return (
-    
-    <div className={styles.formContainer}>
-      <form className={styles.contactForm} onSubmit={handleSubmit}>
-        <FormInput label="Name" name="name" value={formData["name"]} handleInput={handleInput} />
-        <FormInput label="Email" name="email" type="email" value={formData["email"]} handleInput={handleInput} />
+    <div className={`${className} ${styles.formContainer}`}>
+      <form className={`p-3 ${styles.contactForm}`} onSubmit={handleSubmit}>
+        <FormInput label="Name" name="name" value={formData["name"]} handleInput={handleInput} autoComplete="name"/>
+        <FormInput label="Email" name="email" type="email" value={formData["email"]} handleInput={handleInput} autoComplete="email"/>
         <FormInput label="Image Url" name="image_url" type="url"value={formData["image_url"]} handleInput={handleInput} />
         <FormInput 
           label="Phone Number" 
@@ -19,7 +18,7 @@ export default function ContactForm({formData, handleInput, handleSubmit}) {
           attributes={{pattern: "[0-9]{3}-[0-9]{3}-[0-9]{4}"}} 
           helpText="Format: 123-456-7890" 
           value={formData["phone_number"]}
-          handleInput={handleInput} />
+          handleInput={handleInput} autoComplete="tel"/>
         <div className={styles.buttonContainer}>
           <button className="btn btn-primary" type="submit"> 
             Submit 
@@ -34,5 +33,6 @@ export default function ContactForm({formData, handleInput, handleSubmit}) {
 ContactForm.propTypes = {
   formData: PropTypes.object.isRequired,
   handleInput: PropTypes.func,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  className: PropTypes.string
 };

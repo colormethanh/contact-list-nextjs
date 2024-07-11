@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-export default function FormInput({name, handleInput, label, value, attributes={}, helpText="", type="text", isRequired=true}) {
+export default function FormInput({name, handleInput, label, value, attributes={}, helpText="", type="text", isRequired=true, autoComplete="off"}) {
 
-  const inputProps = { name, type, value, required: isRequired };
+  const inputProps = { name, type, value, autoComplete, required: isRequired };
 
   for (let [key, value] of Object.entries(attributes)) {
     inputProps[key] = value;
@@ -11,7 +11,7 @@ export default function FormInput({name, handleInput, label, value, attributes={
   return (
     <div className="mb-3">
         <label htmlFor={name} className="form-label">{label}</label>
-        <input className="form-control" onChange={(e) => handleInput(e)} {...inputProps} />
+        <input className="form-control" id={name} onChange={(e) => handleInput(e)} {...inputProps} />
         {helpText !== "" &&
         <small id={`${name}Help`}> {helpText} </small>
         }
@@ -27,5 +27,6 @@ FormInput.propTypes = {
   attributes: PropTypes.object,
   helpText: PropTypes.string,
   type: PropTypes.string,
-  isRequired: PropTypes.bool
+  isRequired: PropTypes.bool,
+  autoComplete: PropTypes.string
 };
