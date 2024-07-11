@@ -6,9 +6,9 @@ const ContactsContext = createContext();
 export const useContacts = () => useContext(ContactsContext);
 
 const initialContacts = [{
-  name: "Thanh", 
+  name: "Thanh Nguyen", 
   email:"thanh@email.com", 
-  phone_number: "2223334444",
+  phone_number: "222-333-4444",
   image_url: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Einstein_1921_by_F_Schmutzer_-_restoration.jpg",
   id: 1
 },
@@ -18,6 +18,13 @@ const initialContacts = [{
   phone_number: "111-222-3333",
   image_url: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Einstein_patentoffice.jpg",
   id: 2
+},
+{
+  name: "Sophia Nguyen",
+  email: "sophia@email.com",
+  phone_number: "555-666-7777",
+  image_url: "https://upload.wikimedia.org/wikipedia/commons/f/fb/Albert_Einstein_at_the_age_of_three_%281882%29.jpg",
+  id: 3
 }];
 
 export const ContactsProvider = ({children}) => {

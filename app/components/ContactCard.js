@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from './ContactCard.module.css';
+import styles from "./ContactCard.module.css";
 import PropTypes from "prop-types";
 
 
@@ -16,7 +16,7 @@ export default function ContactCard({person}) {
 };
 
 ContactCard.propTypes = {
-  person: PropTypes.object,
+  person: PropTypes.object.isRequired,
 };
 
 

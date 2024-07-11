@@ -22,9 +22,6 @@ export default function Person() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // todo: Validate form
-    // todo: Success message
-    console.log({...formData, id});
     const updatedPerson = editContact(formData, id);
     setPerson(updatedPerson);
     setIsEdit((prev) => !prev);
@@ -39,6 +36,8 @@ export default function Person() {
     if (isEdit) resetData();
     setIsEdit((prev) => !prev);
   };
+
+  const toggleModal = () => modalToggler.current.click();
 
 
   if (!person) {
@@ -66,11 +65,11 @@ export default function Person() {
         <RerouteBtn text={"<"} route={`/contacts/${prevId && prevId}`} isDisabled={!prevId}/>
         <RerouteBtn text={"Home"} route={"/contacts"} className={"mx-3"} isDisabled={isEdit}/>
         <ActionBtn text={isEdit ? "Cancel" : "Edit"} action={handleToggleEdit} className="me-3"/> 
-        <ActionBtn text="delete" action={() => modalToggler.current.click()} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
+        <ActionBtn text="delete" action={toggleModal} className="me-3" btnStyle="btn-danger" isDisabled={isEdit}/>
         <RerouteBtn text={">"} route={`/contacts/${nextId && nextId}`} isDisabled={!nextId} />
       </div>
       <Modal 
-        id={"myModal"} 
+        id={"contactModal"} 
         body={`You're about to delete the contact for ${person.name}. Are you sure?`}
         title={"Are you sure???"}
         confirmText={"Yes. Delete that sucker!"}
@@ -80,9 +79,9 @@ export default function Person() {
       <button 
         type="button" 
         data-bs-toggle="modal" 
-        data-bs-target="#myModal" 
+        data-bs-target="#contactModal" 
         ref={modalToggler} 
         style={{display:"none"}}>Launch modal</button>
     </main>
-  )
-}
+  );
+};

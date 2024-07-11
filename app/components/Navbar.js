@@ -3,12 +3,10 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const router = useRouter();
 
-
   const handleReroute = (e, route) => {
     e.preventDefault();
     return router.push(route);
-  }
-
+  };
 
   return (
     <nav className="navbar navbar-expand bg-body-tertiary">
@@ -24,5 +22,5 @@ export default function Navbar() {
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};

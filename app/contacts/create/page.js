@@ -1,9 +1,8 @@
 "use client";
-import ContactForm from "@/app/components/ContactForm";
-import useFormData from "@/app/components/useFormData";
 import { useContacts } from "@/app/context/useContacts";
 import { useRouter } from "next/navigation";
-
+import ContactForm from "@/app/components/ContactForm";
+import useFormData from "@/app/components/useFormData";
 
 export default function CreateContact() {
   const { formData, handleInput, resetData} = useFormData();
@@ -12,9 +11,7 @@ export default function CreateContact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // todo: Validate form
     addContact(formData);
-    // todo: Success message
     resetData();
     router.push("/contacts");
   };

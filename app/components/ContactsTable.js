@@ -1,8 +1,8 @@
 import TableRow from "./TableRow";
 import RerouteBtn from "./RerouteBtn";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-export default function ContactsTable({contacts}) {
+export default function ContactsTable({contacts, handleDeleteClick}) {
 
   return(
     <>
@@ -13,11 +13,12 @@ export default function ContactsTable({contacts}) {
             <th scope="col"> Name </th>
             <th scope="col"> Email </th>
             <th scope="col"> Phone </th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           {contacts.map((person, i) => 
-          <TableRow key={i} person={person} /> 
+          <TableRow key={i} person={person} handleDeleteClick={handleDeleteClick}/> 
           )}
         </tbody>
       </table>
@@ -30,5 +31,6 @@ export default function ContactsTable({contacts}) {
 
 
 ContactsTable.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.object)
-}
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDeleteClick: PropTypes.func.isRequired
+};

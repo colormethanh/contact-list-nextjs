@@ -1,6 +1,6 @@
+import PropTypes from "prop-types";
 
-
-export default function Modal({id, body, title, cancelText, confirmText, onConfirm}) {
+export default function Modal({id, body, title, onConfirm, cancelText="cancel", confirmText="confirm"}) {
 
   return (
     <div className="modal" tabIndex="-1" id={id}>
@@ -20,5 +20,15 @@ export default function Modal({id, body, title, cancelText, confirmText, onConfi
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+
+Modal.propTypes = {
+  id: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  cancelText: PropTypes.string,
+  confirmText: PropTypes.string
+};
